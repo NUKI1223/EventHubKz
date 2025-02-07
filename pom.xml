@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.ngcvfb</groupId>
-    <artifactId>KaggleKZ</artifactId>
+    <artifactId>EventHubKz</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>KaggleKZ</name>
-    <description>KaggleKZ</description>
+    <name>EventHubKz</name>
+    <description>EventHubKz</description>
     <url/>
     <licenses>
         <license/>
