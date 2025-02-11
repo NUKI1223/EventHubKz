@@ -1,11 +1,13 @@
 package org.ngcvfb.eventhubkz.Services;
 
 
+import org.ngcvfb.eventhubkz.DTO.EventDTO;
 import org.ngcvfb.eventhubkz.Models.EventLike;
 import org.ngcvfb.eventhubkz.Repository.EventLikeRepository;
 import org.ngcvfb.eventhubkz.Utils.MappingUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +50,19 @@ public class EventLikeService {
             return "liked";
         }
 
+    }
+
+    public int getEventLikeCount(Long eventId) {
+        return eventLikeRepository.findByEventId(eventId).size();
+    }
+    public List<EventDTO> getEventLikes(Long userId) {
+        List<EventLike> eventLikes = eventLikeRepository.findByUserId(userId);
+        List<EventDTO> eventDTOs = new ArrayList<>();
+        for (EventLike eventLike : eventLikes) {
+            EventDTO eventDTO = mappingUtils.mapToEventDTO(eventLike.getEvent());
+            eventDTOs.add(eventDTO);
+        }
+        return eventDTOs; //TODO: create a filters for likes
     }
 
 }

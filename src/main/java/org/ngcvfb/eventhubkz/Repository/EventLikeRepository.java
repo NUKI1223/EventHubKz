@@ -12,4 +12,5 @@ public interface EventLikeRepository extends JpaRepository<EventLike, Long> {
     public List<EventLike> findByEventId(Long eventId);
     public List<EventLike> findByUserId(Long userId);
     public Optional<EventLike> findByUserIdAndEventId(Long userId, Long eventId);
+
 }
