@@ -93,12 +93,28 @@ public class UserController {
         }
 
         // Обновление полей пользователя
-        existingUser.setUsername(userDTO.getUsername());
-        existingUser.setEmail(userDTO.getEmail());
-        existingUser.setPassword(userDTO.getPassword());
-        existingUser.setDescription(userDTO.getDescription());
-        existingUser.setAvatarUrl(userDTO.getAvatarUrl());
-        existingUser.setContacts(userDTO.getContacts());
+        if (userDTO.getUsername() != null) {
+            existingUser.setUsername(userDTO.getUsername());
+        }
+        if (userDTO.getEmail() != null) {
+            existingUser.setEmail(userDTO.getEmail());
+        }
+        if (userDTO.getPassword() != null) {
+            existingUser.setPassword(userDTO.getPassword());
+        }
+        if (userDTO.getRole() != null) {
+            if (userDTO.getRole().equals("ADMIN")) {
+                existingUser.setRole(Role.ADMIN);
+            } else if (userDTO.getRole().equals("USER")) {
+                existingUser.setRole(Role.USER);
+            }
+        }
+        if (userDTO.getContacts() != null) {
+            existingUser.setContacts(userDTO.getContacts());
+        }
+        if (userDTO.getDescription() != null) {
+            existingUser.setDescription(userDTO.getDescription());
+        }
 
         UserModel updatedUser = userService.updateUser(existingUser);
         return ResponseEntity.ok(updatedUser);

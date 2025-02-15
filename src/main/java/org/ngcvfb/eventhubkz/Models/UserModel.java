@@ -1,5 +1,6 @@
 package org.ngcvfb.eventhubkz.Models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,6 +55,7 @@ public class UserModel implements UserDetails {
     private Map<String, String> contacts;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<EventLike> likes;
 
     @Column(name = "verification_code")
