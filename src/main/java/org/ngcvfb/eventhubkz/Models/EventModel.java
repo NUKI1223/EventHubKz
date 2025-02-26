@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,6 +42,7 @@ public class EventModel {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     @JsonManagedReference
+    @JsonIgnore
     private Set<Tag> tags = new HashSet<>();
 
     @Column(nullable = false)
@@ -59,11 +61,13 @@ public class EventModel {
 
     private String externalLink;
 
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "organizer_id", nullable = false)
     private UserModel organizer;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<EventLike> likes;
 
 
@@ -84,5 +88,25 @@ public class EventModel {
                 ", organizer=" + organizer +
                 ", likes=" + likes +
                 '}';
+    }
+
+    // Геттер, возвращающий копию Set<Tag>, чтобы избежать ConcurrentModificationException
+    public Set<Tag> getTags() {
+        return tags == null ? Collections.emptySet() : new HashSet<>(tags);
+    }
+
+    // Сеттер, создающий копию переданного Set<Tag>
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags == null ? new HashSet<>() : new HashSet<>(tags);
+    }
+
+    // Геттер, возвращающий копию Set<EventLike>
+    public Set<EventLike> getLikes() {
+        return likes == null ? Collections.emptySet() : new HashSet<>(likes);
+    }
+
+    // Сеттер для лайков
+    public void setLikes(Set<EventLike> likes) {
+        this.likes = likes == null ? new HashSet<>() : new HashSet<>(likes);
     }
 }

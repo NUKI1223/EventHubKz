@@ -4,6 +4,7 @@ package org.ngcvfb.eventhubkz.Services;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.Tag;
 import org.ngcvfb.eventhubkz.Repository.EventRepository;
+import org.ngcvfb.eventhubkz.Repository.EventSearchRepository;
 import org.ngcvfb.eventhubkz.Utils.MappingUtils;
 import org.springframework.stereotype.Service;
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
@@ -14,16 +15,18 @@ import java.util.stream.Collectors;
 @Service
 public class EventService {
     private final EventRepository eventRepository;
+    private final EventSearchService eventSearch;
     private final TagService tagService;
     private final UserService userService;
     private final MappingUtils mappingUtils;
 
 
-    public EventService(EventRepository eventRepository, TagService tagService, UserService userService, MappingUtils mappingUtils) {
+    public EventService(EventRepository eventRepository, TagService tagService, UserService userService, MappingUtils mappingUtils, EventSearchService eventSearch) {
         this.eventRepository = eventRepository;
         this.tagService = tagService;
         this.userService = userService;
         this.mappingUtils = mappingUtils;
+        this.eventSearch = eventSearch;
     }
 
     public List<EventDTO> getAllEvents() {
@@ -72,12 +75,23 @@ public class EventService {
 
         // Сохранение мероприятия
         EventModel savedEvent = eventRepository.save(event);
+        eventSearch.saveEventToSearch(savedEvent);
 
         // Преобразование EventModel в EventDto
         EventDTO resultDto = mappingUtils.mapToEventDTO(savedEvent);
 
         return resultDto;
     }
+    public void deleteEvent(Long id) {
+         if (!eventRepository.existsById(id)) {
+             throw new NoSuchElementException("Event with id " + id + " not found");
+         }
+        eventRepository.deleteById(id);
+        eventSearch.deleteEventFromSearch(id.toString());
+
+    }
+
+
 
 
 
