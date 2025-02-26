@@ -1,6 +1,8 @@
 package org.ngcvfb.eventhubkz.Services;
 
 
+import jakarta.transaction.Transactional;
+import org.hibernate.Hibernate;
 import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,7 +44,10 @@ public class UserService implements UserDetailsService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        UserModel user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+        Hibernate.initialize(user.getLikes());
+        return user;
     }
 }

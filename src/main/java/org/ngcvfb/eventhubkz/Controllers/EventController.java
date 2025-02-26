@@ -38,11 +38,17 @@ public class EventController {
         //TODO: Maybe add check for relevant tag
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<EventDTO>> searchByTags(@RequestParam List<String> tags) {
-        Set<Tag> tagsSet = new HashSet<>(tagService.findTag(tags));
-        List<EventDTO> events = eventService.getEventsByTags(tagsSet);
-        return ResponseEntity.ok(events);
-        //TODO: Add try catch for error and check for relevant tag
+//    @GetMapping("/search")
+//    public ResponseEntity<List<EventDTO>> searchByTags(@RequestParam List<String> tags) {
+//        Set<Tag> tagsSet = new HashSet<>(tagService.findTag(tags));
+//        List<EventDTO> events = eventService.getEventsByTags(tagsSet);
+//        return ResponseEntity.ok(events);
+//        //TODO: Add try catch for error and check for relevant tag
+//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<EventDTO> deleteEvent(@PathVariable Long id) {
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
     }
 }

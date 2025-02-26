@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,4 +31,13 @@ public class Tag {
     )
     @JsonBackReference
     private Set<EventModel> events = new HashSet<>();
+
+
+    public Set<EventModel> getEvents() {
+        return events == null ? Collections.emptySet() : new HashSet<>(events);
+    }
+
+    public void setEvents(Set<EventModel> events) {
+        this.events = events == null ? new HashSet<>() : new HashSet<>(events);
+    }
 }

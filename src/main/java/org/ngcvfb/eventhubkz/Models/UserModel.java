@@ -12,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -56,7 +53,7 @@ public class UserModel implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<EventLike> likes;
+    private Set<EventLike> likes =  new HashSet<>();
 
     @Column(name = "verification_code")
     private String verificationCode;
@@ -94,6 +91,18 @@ public class UserModel implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+
+
+    // Геттер, возвращающий копию Set<EventLike>
+    public Set<EventLike> getLikes() {
+        return likes == null ? Collections.emptySet() : new HashSet<>(likes);
+    }
+
+    // Сеттер для лайков
+    public void setLikes(Set<EventLike> likes) {
+        this.likes = likes == null ? new HashSet<>() : new HashSet<>(likes);
     }
 }
 
