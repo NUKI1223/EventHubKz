@@ -5,10 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.Role;
-import org.ngcvfb.eventhubkz.Models.Tag;
 import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Repository.EventRepository;
-import org.ngcvfb.eventhubkz.Repository.TagRepository;
 import org.ngcvfb.eventhubkz.Repository.UserRepository;
 import org.ngcvfb.eventhubkz.Services.EventLikeService;
 import org.ngcvfb.eventhubkz.Services.EventService;
@@ -16,13 +14,11 @@ import org.ngcvfb.eventhubkz.Services.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootTest
 @Transactional
