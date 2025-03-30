@@ -1,11 +1,92 @@
 version: '3'
 services:
+  app:
+    build:
+      context: /home/ngcvfb/IdeaProjects/EventHubKz
+      dockerfile: Dockerfile
+    container_name: eventhubkz_app
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      postgresqldb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_started
+      redis:
+        condition: service_started
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    networks:
+      app:
+
+  postgresqldb:
+    image: postgres:14
+    container_name: postgresqldb
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: EventHubKz
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${DB_USER} -d EventHubKz" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      app:
+
+
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.8.0
     container_name: elasticsearch
+    env_file:
+      - .env
     environment:
       - discovery.type=single-node
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
       - xpack.security.enabled=false
     ports:
-      - 9200:9200
+      - "9200:9200"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:9200 || exit 1" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      app:
+
+
+  redis:
+    image: redis:6.2
+    container_name: redis
+    env_file:
+      - .env
+    ports:
+      - "6379:6379"
+    networks:
+      app:
+
+  rabbitmq:
+    container_name: rabbitmq-new
+    image: rabbitmq:3-management
+    env_file:
+      - .env
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBIT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBIT_PASSWORD}
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      app:
+
+networks:
+  app:
+    driver: bridge
