@@ -3,6 +3,8 @@ package org.ngcvfb.eventhubkz.Models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -34,6 +36,7 @@ public class EventRequest {
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Tag> tags;
 
     @Column(nullable = false)

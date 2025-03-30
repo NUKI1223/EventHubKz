@@ -51,20 +51,19 @@ public class AuthenticationService {
     }
 
     public UserModel authenticate(LoginUserDTO input) {
-        UserModel user = userRepository.findByEmail(input.getEmail())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<UserModel> user = userRepository.findByEmail(input.getEmail());
 
-        if (!user.isEnabled()) {
+        if (!user.get().isEnabled()) {
             throw new RuntimeException("Account not verified. Please verify your account.");
         }
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        user.getUsername(),
+                        user.get().getUsername(),
                         input.getPassword()
                 )
         );
 
-        return user;
+        return user.orElse(null);
     }
 
     public void verifyUser(VerifyUserDto input) {

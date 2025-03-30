@@ -9,6 +9,7 @@ import org.ngcvfb.eventhubkz.Utils.MappingUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,8 +23,8 @@ public class EventRequestService {
         this.mappingUtils = mappingUtils;
     }
 
-    public EventRequestDTO createEventRequest(EventRequestDTO eventRequestDTO, String recruiterEmail) {
-        UserModel userModel = userService.getUserByEmail(recruiterEmail);
+    public EventRequestDTO createEventRequest(EventRequestDTO eventRequestDTO) {
+        UserModel userModel = userService.getUserByEmail(eventRequestDTO.getRequesterEmail());
         EventRequest eventRequest = mappingUtils.mapToEventRequest(eventRequestDTO);
         eventRequest.setRequester(userModel);
         eventRequest.setStatus(RequestStatus.PENDING);
@@ -48,12 +49,12 @@ public class EventRequestService {
         eventRequestRepository.deleteById(id);
     }
 
-    public EventRequestDTO updateEventRequest(Long id, EventRequestDTO eventRequestDTO) {
+    public EventRequestDTO updateEventRequest(Long id, String status, String adminComment) {
         EventRequest existingRequest = eventRequestRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("EventRequest not found"));
 
-        existingRequest.setStatus(eventRequestDTO.getStatus());
-        existingRequest.setAdminComment(eventRequestDTO.getAdminComment());
+        existingRequest.setStatus(Objects.equals(status, "APPROVED") ? RequestStatus.APPROVED : RequestStatus.REJECTED);
+        existingRequest.setAdminComment(adminComment);
 
         EventRequest updatedRequest = eventRequestRepository.save(existingRequest);
         return mappingUtils.mapToEventRequestDTO(updatedRequest);

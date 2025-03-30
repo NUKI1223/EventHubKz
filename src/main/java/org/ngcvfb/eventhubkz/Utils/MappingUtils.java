@@ -4,6 +4,7 @@ import org.ngcvfb.eventhubkz.DTO.EventDTO;
 import org.ngcvfb.eventhubkz.DTO.EventRequestDTO;
 import org.ngcvfb.eventhubkz.DTO.UserDTO;
 import org.ngcvfb.eventhubkz.Models.*;
+import org.ngcvfb.eventhubkz.Services.EventLikeService;
 import org.ngcvfb.eventhubkz.Services.TagService;
 import org.ngcvfb.eventhubkz.Services.UserService;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,11 @@ import java.util.stream.Collectors;
 public class MappingUtils {
     private final UserService userService;
     private final TagService tagService;
-    public MappingUtils(UserService userService,  TagService tagService) {
+    public MappingUtils(UserService userService, TagService tagService) {
         this.userService = userService;
 
         this.tagService = tagService;
+
     }
 
     public EventDTO mapToEventDTO(EventModel eventModel) {
@@ -37,30 +39,100 @@ public class MappingUtils {
         eventDTO.setTitle(eventModel.getTitle());
         eventDTO.setMainImageUrl(eventModel.getMainImageUrl());
         eventDTO.setShortDescription(eventModel.getShortDescription());
+        eventDTO.setLikeCount(eventModel.getLikes().size());
         return eventDTO;
+    }
+
+    public EventModel updateEventModel(EventDTO eventDTO, EventModel eventModel) {
+        if (eventDTO.getId() != null) {
+            eventModel.setId(eventDTO.getId());
+        }
+        if (eventDTO.getFullDescription() != null) {
+            eventModel.setFullDescription(eventDTO.getFullDescription());
+        }
+        if (eventDTO.getLocation() != null) {
+            eventModel.setLocation(eventDTO.getLocation());
+        }
+        if (eventDTO.getEventDate() != null) {
+            eventModel.setEventDate(eventDTO.getEventDate());
+        }
+        if (eventDTO.getTags() != null) {
+            Set<String> tags = eventDTO.getTags();
+            Set<Tag> finalTags = new HashSet<>();
+            for (String tagName : tags) {
+                if (tags != null) {
+                    finalTags.add(tagService.findTag(tagName));
+                }
+            }
+            eventModel.setTags(finalTags);
+        }
+        if (eventDTO.getOrganizerEmail() != null) {
+            eventModel.setOrganizer(userService.getUserByEmail(eventDTO.getOrganizerEmail()));
+        }
+        if (eventDTO.getExternalLink() != null) {
+            eventModel.setExternalLink(eventDTO.getExternalLink());
+        }
+        if (eventDTO.getRegistrationDeadline() != null) {
+            eventModel.setRegistrationDeadline(eventDTO.getRegistrationDeadline());
+        }
+        if (eventDTO.getTitle() != null) {
+            eventModel.setTitle(eventDTO.getTitle());
+        }
+        if (eventDTO.getMainImageUrl() != null) {
+            eventModel.setMainImageUrl(eventDTO.getMainImageUrl());
+        }
+        if (eventDTO.getShortDescription() != null) {
+            eventModel.setShortDescription(eventDTO.getShortDescription());
+        }
+
+        eventModel.setOnline(eventDTO.isOnline());
+        return eventModel;
     }
 
     public EventModel mapToEventModel(EventDTO eventDTO) {
         EventModel eventModel = new EventModel();
-        eventModel.setId(eventDTO.getId());
-        eventModel.setFullDescription(eventDTO.getFullDescription());
-        eventModel.setOnline(eventDTO.isOnline());
-        eventModel.setLocation(eventDTO.getLocation());
-        eventModel.setEventDate(eventDTO.getEventDate());
-        eventModel.setOrganizer(userService.getUserByEmail(eventDTO.getOrganizerEmail()));
-        eventModel.setExternalLink(eventDTO.getExternalLink());
-        Set<String> tags = eventDTO.getTags();
-        Set<Tag> finalTags = new HashSet<>();
-        for (String tagName : tags) {
-            if (tags != null) {
-                finalTags.add(tagService.findOrCreateTag(tagName));
-            }
+        if (eventDTO.getId() != null) {
+            eventModel.setId(eventDTO.getId());
         }
-        eventModel.setTags(finalTags);
-        eventModel.setRegistrationDeadline(eventDTO.getRegistrationDeadline());
-        eventModel.setTitle(eventDTO.getTitle());
-        eventModel.setMainImageUrl(eventDTO.getMainImageUrl());
-        eventModel.setShortDescription(eventDTO.getShortDescription());
+        if (eventDTO.getFullDescription() != null) {
+            eventModel.setFullDescription(eventDTO.getFullDescription());
+        }
+        if (eventDTO.getLocation() != null) {
+            eventModel.setLocation(eventDTO.getLocation());
+        }
+        if (eventDTO.getEventDate() != null) {
+            eventModel.setEventDate(eventDTO.getEventDate());
+        }
+        if (eventDTO.getTags() != null) {
+            Set<String> tags = eventDTO.getTags();
+            Set<Tag> finalTags = new HashSet<>();
+            for (String tagName : tags) {
+                if (tags != null) {
+                    finalTags.add(tagService.findTag(tagName));
+                }
+            }
+            eventModel.setTags(finalTags);
+        }
+        if (eventDTO.getOrganizerEmail() != null) {
+            eventModel.setOrganizer(userService.getUserByEmail(eventDTO.getOrganizerEmail()));
+        }
+        if (eventDTO.getExternalLink() != null) {
+            eventModel.setExternalLink(eventDTO.getExternalLink());
+        }
+        if (eventDTO.getRegistrationDeadline() != null) {
+            eventModel.setRegistrationDeadline(eventDTO.getRegistrationDeadline());
+        }
+        if (eventDTO.getTitle() != null) {
+            eventModel.setTitle(eventDTO.getTitle());
+        }
+        if (eventDTO.getMainImageUrl() != null) {
+            eventModel.setMainImageUrl(eventDTO.getMainImageUrl());
+        }
+        if (eventDTO.getShortDescription() != null) {
+            eventModel.setShortDescription(eventDTO.getShortDescription());
+        }
+
+        eventModel.setOnline(eventDTO.isOnline());
         return eventModel;
     }
 
@@ -70,9 +142,15 @@ public class MappingUtils {
         eventRequestDTO.setTitle(eventRequest.getTitle());
         eventRequestDTO.setShortDescription(eventRequest.getShortDescription());
         eventRequestDTO.setFullDescription(eventRequest.getFullDescription());
-        eventRequestDTO.setTags(eventRequest.getTags() != null
-                ? eventRequest.getTags().stream().map(Tag::getName).collect(Collectors.toSet())
-                : Collections.emptySet());
+
+        eventRequestDTO.setTags(tagService.findTags(eventRequest
+                .getTags()
+                .stream()
+                .map(Tag::getName)
+                .collect(Collectors.toList()))
+                .stream()
+                .map(Tag::getName)
+                .collect(Collectors.toSet()));
         eventRequestDTO.setLocation(eventRequest.getLocation());
         eventRequestDTO.setOnline(eventRequest.isOnline());
         eventRequestDTO.setEventDate(eventRequest.getEventDate());
@@ -91,9 +169,7 @@ public class MappingUtils {
         eventRequest.setTitle(eventRequestDTO.getTitle());
         eventRequest.setShortDescription(eventRequestDTO.getShortDescription());
         eventRequest.setFullDescription(eventRequestDTO.getFullDescription());
-        eventRequest.setTags(eventRequestDTO.getTags() != null
-                ? eventRequestDTO.getTags().stream().map(tagService::findOrCreateTag).collect(Collectors.toSet())
-                : Collections.emptySet());
+        eventRequest.setTags(tagService.findTags(eventRequestDTO.getTags().stream().toList()));
         eventRequest.setLocation(eventRequestDTO.getLocation());
         eventRequest.setOnline(eventRequestDTO.isOnline());
         eventRequest.setEventDate(eventRequestDTO.getEventDate());

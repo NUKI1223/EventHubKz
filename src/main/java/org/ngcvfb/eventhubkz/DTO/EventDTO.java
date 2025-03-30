@@ -4,7 +4,9 @@ package org.ngcvfb.eventhubkz.DTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.redis.core.RedisHash;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ public class EventDTO {
     private Set<String> tags;         // Теги мероприятия
     private String location;          // Локация
     private boolean online;           // Онлайн/оффлайн
+    private int likeCount;
 
     private LocalDateTime eventDate;  // Дата проведения
     private LocalDateTime registrationDeadline; // Дата окончания регистрации

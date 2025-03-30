@@ -2,52 +2,70 @@ package org.ngcvfb.eventhubkz.Services;
 
 
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
+import org.ngcvfb.eventhubkz.DTO.NotificationMessage;
 import org.ngcvfb.eventhubkz.Models.EventLike;
+import org.ngcvfb.eventhubkz.Models.EventModel;
+import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Repository.EventLikeRepository;
+import org.ngcvfb.eventhubkz.Repository.EventRepository;
 import org.ngcvfb.eventhubkz.Utils.MappingUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class EventLikeService {
     private final EventLikeRepository eventLikeRepository;
+    private final NotificationProducer notificationProducer;
+
     private final UserService userService;
     private final EventService eventService;
+    private final EventRepository eventRepository;
     private final MappingUtils mappingUtils;
-    public EventLikeService(EventLikeRepository eventLikeRepository, UserService userService, EventService eventService, MappingUtils mappingUtils) {
+    public EventLikeService(EventLikeRepository eventLikeRepository, UserService userService, EventService eventService, MappingUtils mappingUtils, NotificationProducer notificationProducer, EventRepository eventRepository) {
         this.eventLikeRepository = eventLikeRepository;
         this.userService = userService;
         this.eventService = eventService;
         this.mappingUtils = mappingUtils;
+        this.notificationProducer = notificationProducer;
+        this.eventRepository = eventRepository;
     }
+
+
 
     public String addLike(Long eventId, Long userId) {
-        Optional<EventLike> eventLike = eventLikeRepository.findByUserIdAndEventId(userId, eventId);
-        if (eventLike.isPresent()) {
-            deleteLike(eventId, userId);
-            return "deleted";
-        }
-        else {
+        Optional<EventLike> existingLike = eventLikeRepository.findByUserIdAndEventId(userId, eventId);
+        if (existingLike.isPresent()) {
+            return "event is already liked";
+        } else {
+
+            UserModel user = userService.getUserById(userId);
+            EventModel event = eventRepository.findById(eventId)
+                    .orElseThrow(() -> new NoSuchElementException("Event not found"));
+
             EventLike newLike = new EventLike();
-            newLike.setEvent(mappingUtils.mapToEventModel(eventService.getEvent(eventId)));
-            newLike.setUser(userService.getUserById(userId));
+            newLike.setEvent(event);
+            newLike.setUser(user);
+
             eventLikeRepository.save(newLike);
+            eventLikeRepository.flush();
             return "liked";
         }
-
     }
+
+
+
+    @Transactional
     public String deleteLike(Long eventId, Long userId) {
         EventLike eventLike = eventLikeRepository.findByUserIdAndEventId(userId, eventId).orElse(null);
         if (eventLike != null) {
-            eventLikeRepository.delete(eventLike);
+            eventLikeRepository.deleteEventLikeById(eventLike.getId());
+            eventLikeRepository.flush();
             return "deleted";
         }
         else{
-            addLike(eventId, userId);
-            return "liked";
+            return "event is already unliked";
         }
 
     }

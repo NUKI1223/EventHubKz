@@ -5,8 +5,7 @@ import org.ngcvfb.eventhubkz.Models.Tag;
 import org.ngcvfb.eventhubkz.Repository.TagRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -30,11 +29,33 @@ public class TagService {
         return tags;
     }
 
-    public Tag findOrCreateTag(String name) {
-        return tagRepository.findByName(name)
-                .orElseGet(() -> createTag(name));
+    public Tag findTag(String name) {
+        Optional<Tag> tag =  tagRepository.findByName(name);
+        if (tag.isPresent()) {
+            return tag.get();
+        }
+        return null;
     }
-    public List<Tag> findTag(List<String> name) {
-        return tagRepository.findByNameIn(name);
+
+    public Set<Tag> findTags(List<String> names) {
+        List<Tag> tags = new ArrayList<>();
+        for (String name :names) {
+            Optional<Tag> tag =  tagRepository.findByName(name);
+            if (tag.isPresent()) {
+                tags.add(tag.get());
+            }
+        }
+        return new HashSet<>(tags);
+    }
+
+    public Set<Tag> findOrCreateTags(List<String> names) {
+        Set<Tag> tags = new HashSet<>();
+        for (String name : names) {
+            Tag tag = findTag(name);
+            if (tag != null) {
+                tags.add(tag);
+            }
+        }
+        return tags;
     }
 }
