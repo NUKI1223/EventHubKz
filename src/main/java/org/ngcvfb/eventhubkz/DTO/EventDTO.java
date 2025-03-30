@@ -1,12 +1,8 @@
 package org.ngcvfb.eventhubkz.DTO;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.redis.core.RedisHash;
-
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 

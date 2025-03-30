@@ -4,9 +4,6 @@ package org.ngcvfb.eventhubkz.Models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)

@@ -2,7 +2,6 @@ package org.ngcvfb.eventhubkz.Services;
 
 
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
-import org.ngcvfb.eventhubkz.DTO.NotificationMessage;
 import org.ngcvfb.eventhubkz.Models.EventLike;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.UserModel;
@@ -80,7 +79,7 @@ public class EventLikeService {
             EventDTO eventDTO = mappingUtils.mapToEventDTO(eventLike.getEvent());
             eventDTOs.add(eventDTO);
         }
-        return eventDTOs; //TODO: create a filters for likes
+        return eventDTOs;
     }
 
 }

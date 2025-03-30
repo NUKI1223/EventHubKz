@@ -25,11 +25,9 @@ public class S3Controller {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            // Преобразуем MultipartFile во временный файл
             File tempFile = File.createTempFile("upload-", file.getOriginalFilename());
             file.transferTo(tempFile);
 
-            // Генерируем уникальное имя для файла в бакете
             String key = "uploads/" + UUID.randomUUID() + "-" + file.getOriginalFilename();
 
             String fileUrl = s3Service.uploadFile(key, tempFile);
@@ -43,7 +41,6 @@ public class S3Controller {
         }
     }
 
-    // Пример удаления файла
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteFile(@RequestParam("key") String key) {
         try {

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface EventRequestRepository extends JpaRepository<EventRequest, Long> {
-    List<EventRequest> findByStatus(RequestStatus status); // Для фильтрации по статусу
+    List<EventRequest> findByStatus(RequestStatus status);
     List<EventRequest> findByRequesterId(Long requesterId);
 }

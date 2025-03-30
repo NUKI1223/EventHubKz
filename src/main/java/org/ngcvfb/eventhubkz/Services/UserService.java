@@ -7,7 +7,6 @@ import org.ngcvfb.eventhubkz.DTO.UserDTO;
 import org.ngcvfb.eventhubkz.Models.Role;
 import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

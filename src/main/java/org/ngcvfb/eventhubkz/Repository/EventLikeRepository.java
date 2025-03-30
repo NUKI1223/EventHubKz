@@ -20,5 +20,4 @@ public interface EventLikeRepository extends JpaRepository<EventLike, Long> {
     @Query("DELETE FROM EventLike e WHERE e.id = :id")
     void deleteEventLikeById(@Param("id") Long id);
 
-    public void deleteByEventId(Long eventId);
 }

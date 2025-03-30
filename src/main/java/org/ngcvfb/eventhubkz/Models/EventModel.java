@@ -5,11 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.data.redis.core.RedisHash;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;

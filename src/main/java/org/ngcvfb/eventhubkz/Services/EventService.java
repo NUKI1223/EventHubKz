@@ -1,20 +1,15 @@
 package org.ngcvfb.eventhubkz.Services;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.transaction.annotation.Transactional;
 import org.ngcvfb.eventhubkz.Models.EventLike;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.Tag;
-import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Repository.EventCacheRepository;
 import org.ngcvfb.eventhubkz.Repository.EventLikeRepository;
 import org.ngcvfb.eventhubkz.Repository.EventRepository;
-import org.ngcvfb.eventhubkz.Repository.EventSearchRepository;
 import org.ngcvfb.eventhubkz.Utils.MappingUtils;
 import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.ngcvfb.eventhubkz.DTO.EventDTO;

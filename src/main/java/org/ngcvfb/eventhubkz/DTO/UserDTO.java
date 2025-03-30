@@ -21,7 +21,7 @@ public class UserDTO {
 
     private String description;
 
-    private String role; // Обычно тип Enum, здесь для простоты String
+    private String role;
 
     private String avatarUrl;
 

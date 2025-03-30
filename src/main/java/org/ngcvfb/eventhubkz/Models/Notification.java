@@ -16,12 +16,12 @@ public class Notification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String userEmail; // Можно использовать userId, если идентификатор числовой
+    private String userEmail;
 
     @Column(nullable = false)
     private String message;
 
-    private String link; // Ссылка на мероприятие или детальную страницу уведомления
+    private String link;
 
     private LocalDateTime createdAt;
 

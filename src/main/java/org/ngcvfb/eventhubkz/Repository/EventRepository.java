@@ -16,7 +16,5 @@ public interface EventRepository extends JpaRepository<EventModel, Long> {
     @Query("SELECT e FROM EventModel e JOIN e.tags t WHERE t IN :tags GROUP BY e HAVING COUNT(t) = :tagCount")
     List<EventModel> findAllByTags(@Param("tags") Set<Tag> tags, @Param("tagCount") long tagCount);
 
-    @Modifying
-    @Query("DELETE FROM EventModel e WHERE e.id = :id")
-    void deleteEventById(@Param("id") Long id);
+
 }
