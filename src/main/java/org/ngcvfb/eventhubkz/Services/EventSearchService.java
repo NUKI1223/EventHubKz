@@ -8,6 +8,8 @@ import org.ngcvfb.eventhubkz.Models.EventDocument;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.Tag;
 import org.ngcvfb.eventhubkz.Repository.EventSearchRepository;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
@@ -28,6 +30,8 @@ public class EventSearchService {
         this.elasticsearchOperations = elasticsearchOperations;
         this.eventSearchRepository = eventSearchRepository;
     }
+
+
     public EventDocument saveEventToSearch(EventModel eventModel) {
         EventDocument eventDocument = new EventDocument();
         eventDocument.setId(eventModel.getId().toString());
@@ -38,6 +42,7 @@ public class EventSearchService {
         eventDocument.setLocation(eventModel.getLocation());
         return eventSearchRepository.save(eventDocument);
     }
+
 
     public List<EventDocument> searchEvents(String searchTerm) {
         Criteria criteria = new Criteria("title").contains(searchTerm)
