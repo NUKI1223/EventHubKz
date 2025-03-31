@@ -2,7 +2,7 @@ version: '3'
 services:
   app:
     build:
-      context: /home/ngcvfb/IdeaProjects/EventHubKz
+      context: /home/ngcvfb/IdeaProjects/EventHubKz/backend
       dockerfile: Dockerfile
     container_name: eventhubkz_app
     depends_on:
@@ -74,7 +74,7 @@ services:
       app:
 
   rabbitmq:
-    container_name: rabbitmq-new
+    container_name: rabbitmq
     image: rabbitmq:3-management
     env_file:
       - .env
