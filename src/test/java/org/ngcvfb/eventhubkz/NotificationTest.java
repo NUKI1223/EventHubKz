@@ -100,7 +100,7 @@ public class NotificationTest {
     @Test
     void sendNotification(){
         notificationProducer.sendScheduledNotification();
-        List<String> notif = notificationRepository.findAllByUserEmail(testUser.getEmail()).stream().map(Notification::getLink).toList();
+        List<String> notif = notificationRepository.findAllByUserEmail(testUser.getUsername()).stream().map(Notification::getLink).toList();
         assertNotNull(notif.getFirst());
     }
 

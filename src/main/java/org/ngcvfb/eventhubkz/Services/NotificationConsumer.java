@@ -22,7 +22,7 @@ public class NotificationConsumer {
     public void receiveNotification(NotificationMessage message) {
         System.out.println("Received message: "+message);
         String notificationText = "Мы обнаружили похожие мероприятия, которые могут вам понравиться!";
-        String link = "http://localhost:8080/api/events/" + message.getEventId();
+        String link = "http://localhost:5173//api/events/" + message.getEventId();
         Notification notification = new Notification(
                 message.getEmailName(),
                 notificationText,

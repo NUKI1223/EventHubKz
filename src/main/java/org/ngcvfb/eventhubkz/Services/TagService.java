@@ -18,6 +18,10 @@ public class TagService {
 
     public Tag createTag(String name) {
         Tag tag = Tag.builder().name(name).build();
+        Optional<Tag> existedTag =  tagRepository.findByName(name);
+        if (existedTag.isPresent()) {
+            return existedTag.get();
+        }
         return tagRepository.save(tag);
     }
 

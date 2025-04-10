@@ -36,7 +36,7 @@ public class NotificationProducer {
         amqpTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.ROUTING_KEY, notification);
         System.out.println("Send notification message: " + notification);
     }
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(fixedRate = 3600000)
     @Transactional
     public void sendScheduledNotification() {
         List<UserModel> users = new ArrayList<>(userService.getAllUsers());
@@ -48,6 +48,11 @@ public class NotificationProducer {
                 error = true;
                 System.out.println(recommendedEventLinks);
             }
+            if (Objects.equals(recommendedEventLinks, "No tags found from user's liked events."))
+            {
+                error = true;
+                System.out.println(recommendedEventLinks);
+            }
             if (Objects.equals(recommendedEventLinks, "User has not liked any events.")) {
                 error = true;
                 System.out.println(recommendedEventLinks);
@@ -56,7 +61,7 @@ public class NotificationProducer {
                 if (!recommendedEventLinks.isEmpty()) {
                     String message = "We've found an event that you might enjoy: ";
                     Notification notification = new Notification(
-                            user.getEmail(),
+                            user.getUsername(),
                             message,
                             recommendedEventLinks,
                             LocalDateTime.now(),

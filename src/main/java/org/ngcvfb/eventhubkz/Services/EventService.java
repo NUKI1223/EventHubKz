@@ -104,9 +104,11 @@ public class EventService {
     @CacheEvict(value = "events", key = "#id")
     @Transactional
     public void deleteEvent(Long id) {
+
         EventModel event = eventRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Event with id " + id + " not found"));
         eventRepository.delete(event);
+        eventRepository.flush();
         eventSearch.deleteEventFromSearch(id.toString());
 
     }
@@ -136,7 +138,7 @@ public class EventService {
             }
         }
         if (tagFrequency.isEmpty()) {
-            throw new NoSuchElementException("No tags found from "+userService.getUserById(userId).getEmail() +"'s liked events.");
+            return "No tags found from user's liked events.";
         }
 
         List<String> sortedTags = tagFrequency.entrySet().stream()
@@ -170,7 +172,7 @@ public class EventService {
 
         int randIndex = ThreadLocalRandom.current().nextInt(recommendedEvents.size());
         EventModel recommendedEvent = recommendedEvents.get(randIndex);
-        return "http://localhost:8080/api/events/" + recommendedEvent.getId();
+        return "http://localhost:5173/events/" + recommendedEvent.getId();
     }
     }
 

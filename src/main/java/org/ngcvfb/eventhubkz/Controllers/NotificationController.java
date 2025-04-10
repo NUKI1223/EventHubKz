@@ -20,10 +20,10 @@ public class NotificationController {
         this.notificationRepository = notificationRepository;
     }
 
-    @Operation(summary = "Getting all user notification by email")
+    @Operation(summary = "Getting all user notification by username")
     @GetMapping
-    public ResponseEntity<List<Notification>> getNotifications(@RequestParam String userEmail) {
-        List<Notification> notifications = notificationRepository.findAllByUserEmail(userEmail);
+    public ResponseEntity<List<Notification>> getNotifications(@RequestParam String username) {
+        List<Notification> notifications = notificationRepository.findAllByUserEmail(username);
         for (Notification notification : notifications) {
             if (!notification.isRead()){
                 notification.setRead(true);
@@ -42,5 +42,20 @@ public class NotificationController {
         notification.setRead(true);
         notificationRepository.save(notification);
         return ResponseEntity.ok(notification);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteNotification(@PathVariable Long id) {
+        Notification notification = notificationRepository.findById(id).orElse(null);
+        if (notification == null) {
+            return ResponseEntity.notFound().build();
+        }
+        notificationRepository.delete(notification);
+        return ResponseEntity.ok().build();
+    }
+    @DeleteMapping("/all")
+    public ResponseEntity<Void> deleteAllNotifications(@RequestParam String username) {
+        notificationRepository.deleteAllByUserEmail(username);
+        return ResponseEntity.ok().build();
     }
 }

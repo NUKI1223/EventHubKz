@@ -7,7 +7,7 @@ echo "Поднимаем зависимые контейнеры..."
 docker-compose up -d postgresqldb elasticsearch rabbitmq redis
 
 echo "Ожидаем готовности сервисов..."
-sleep 5
+sleep 2
 
 echo "Собираем jar файл..."
 mvn clean install -Dspring.profiles.active=test

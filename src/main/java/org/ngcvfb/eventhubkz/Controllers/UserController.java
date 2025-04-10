@@ -64,6 +64,16 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @Operation(summary = "Getting user by username")
+    @GetMapping("/{username}")
+    public ResponseEntity<UserModel> getUserByUsername(@PathVariable String username) {
+        UserModel user = userService.getUserByUsername(username);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
     @Operation(summary = "Getting user by email")
     @GetMapping("/email/{email}")
     public ResponseEntity<UserModel> getUserByEmail(@PathVariable String email) {
@@ -98,13 +108,28 @@ public class UserController {
 
     }
 
-    @Operation(summary = "Updating user by id")
-    @PutMapping("/id/{id}")
+    @Operation(summary = "Updating user")
+    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<UserModel> updateUser(
-            @PathVariable("id") Long id,
-            @RequestBody UserDTO userDTO
+            @RequestPart("user") UserDTO userDTO,
+            @RequestPart(value = "file",  required = false) MultipartFile file
+
     ) {
-        UserModel updatedUser = userService.updateUser(id,userDTO);
+        try {
+            if (file != null && !file.isEmpty()) {
+                File tempFile = File.createTempFile("profile-", file.getOriginalFilename());
+                file.transferTo(tempFile);
+                String key = "users/" + UUID.randomUUID() + "-" + file.getOriginalFilename();
+                String fileUrl = s3Service.uploadFile(key, tempFile);
+                tempFile.delete();
+                userDTO.setAvatarUrl(fileUrl);
+            }
+            userService.updateUser(userDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(null);
+        }
+        UserModel updatedUser = userService.updateUser(userDTO);
         return ResponseEntity.ok(updatedUser);
     }
 

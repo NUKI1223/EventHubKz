@@ -35,7 +35,7 @@ public class EventModel {
     @JsonIgnore
     private String fullDescription;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
             name = "event_tags",
             joinColumns = @JoinColumn(name = "event_id"),

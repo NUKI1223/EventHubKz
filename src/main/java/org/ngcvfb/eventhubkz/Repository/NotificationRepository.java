@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface NotificationRepository extends JpaRepository<Notification, Long> {
     List<Notification> findAllByUserEmail(String email);
+    void deleteAllByUserEmail(String email);
 }

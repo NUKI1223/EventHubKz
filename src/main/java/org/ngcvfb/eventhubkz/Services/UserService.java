@@ -35,11 +35,17 @@ public class UserService implements UserDetailsService {
         return userModel.orElse(null);
 
     }
+
+    public UserModel getUserByUsername(String username) {
+        Optional<UserModel> userModel = userRepository.findByUsername(username);
+        return userModel.orElse(null);
+    }
+
     public UserModel createUser(UserModel user) {
         return userRepository.save(user);
     }
-    public UserModel updateUser(Long id, UserDTO userDTO) {
-        UserModel existingUser = getUserById(id);
+    public UserModel updateUser(UserDTO userDTO) {
+        UserModel existingUser = getUserByUsername(userDTO.getUsername());
         if (existingUser == null) {
             return null;
         }
@@ -65,6 +71,9 @@ public class UserService implements UserDetailsService {
         }
         if (userDTO.getDescription() != null) {
             existingUser.setDescription(userDTO.getDescription());
+        }
+        if (userDTO.getAvatarUrl() != null) {
+            existingUser.setAvatarUrl(userDTO.getAvatarUrl());
         }
 
         return userRepository.save(existingUser);
