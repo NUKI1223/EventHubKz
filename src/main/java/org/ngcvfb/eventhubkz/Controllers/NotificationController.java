@@ -24,11 +24,6 @@ public class NotificationController {
     @GetMapping
     public ResponseEntity<List<Notification>> getNotifications(@RequestParam String username) {
         List<Notification> notifications = notificationRepository.findAllByUserEmail(username);
-        for (Notification notification : notifications) {
-            if (!notification.isRead()){
-                notification.setRead(true);
-            }
-        }
         notificationRepository.saveAll(notifications);
         return ResponseEntity.ok(notifications);
     }

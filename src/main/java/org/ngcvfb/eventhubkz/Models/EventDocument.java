@@ -26,6 +26,9 @@ public class EventDocument {
     @Field(type = FieldType.Text, analyzer = "standard")
     private String description;
 
+    @Field(type = FieldType.Text, analyzer = "standard")
+    private String avatarUrl;
+
     @Field(type = FieldType.Keyword)
     private Set<String> tags;
 

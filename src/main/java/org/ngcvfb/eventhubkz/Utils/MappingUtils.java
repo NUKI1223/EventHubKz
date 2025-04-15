@@ -217,4 +217,27 @@ public class MappingUtils {
         }
         return userModel;
     }
+
+    public UserDTO mapToUserDTO(UserModel userModel) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setUsername(userModel.getUsername());
+        userDTO.setEmail(userModel.getEmail());
+        userDTO.setPassword(userModel.getPassword());
+        if (userModel.getDescription()!=null){
+            userDTO.setDescription(userModel.getDescription());
+        }
+        if (userModel.getAvatarUrl()!=null){
+            userDTO.setAvatarUrl(userModel.getAvatarUrl());
+        }
+        if (userModel.getContacts()!=null){
+            userDTO.setContacts(userModel.getContacts());
+        }
+        if (Objects.equals(userModel.getRole(), "ADMIN")){
+            userDTO.setRole("ADMIN");
+        }
+        else if (Objects.equals(userModel.getRole(), "USER")){
+            userDTO.setRole("USER");
+        }
+        return userDTO;
+    }
 }

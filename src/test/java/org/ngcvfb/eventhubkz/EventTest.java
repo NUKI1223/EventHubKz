@@ -3,6 +3,7 @@ package org.ngcvfb.eventhubkz;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
+import org.ngcvfb.eventhubkz.DTO.UserDTO;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.Role;
 import org.ngcvfb.eventhubkz.Models.UserModel;
@@ -11,6 +12,7 @@ import org.ngcvfb.eventhubkz.Repository.UserRepository;
 import org.ngcvfb.eventhubkz.Services.EventLikeService;
 import org.ngcvfb.eventhubkz.Services.EventService;
 import org.ngcvfb.eventhubkz.Services.TagService;
+import org.ngcvfb.eventhubkz.Utils.MappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +43,8 @@ public class EventTest {
     EventModel testEvent;
 
     UserModel testUser;
+    @Autowired
+    private MappingUtils mappingUtils;
 
     @BeforeEach
     void setUp() {
@@ -119,6 +123,23 @@ public class EventTest {
         eventService.deleteEvent(eventDTO.getId());
         List<EventDTO> eventList = eventService.getAllEvents();
         assertFalse(eventList.isEmpty(), "Event list is empty");
+    }
+
+    @Test
+    public void testUsersByLike() {
+        UserModel testUser2 = userRepository.findByEmail("test2@example.com").orElseGet(() -> {
+            UserModel user = UserModel.builder()
+                    .username("testuser2")
+                    .email("test2@example.com")
+                    .password("secret")
+                    .role(Role.USER)
+                    .enabled(true)
+                    .build();
+            return userRepository.save(user);
+        });
+        eventLikeService.addLike(testEvent.getId(), testUser2.getId());
+
+        assertEquals(List.of(testUser.getUsername(), testUser2.getUsername()), eventLikeService.getUsersFromLikedEvent(testEvent.getId()).stream().map(UserDTO::getUsername).toList());
     }
 
 }

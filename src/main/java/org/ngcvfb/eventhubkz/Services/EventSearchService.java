@@ -34,6 +34,7 @@ public class EventSearchService {
         EventDocument eventDocument = new EventDocument();
         eventDocument.setId(eventModel.getId().toString());
         eventDocument.setTitle(eventModel.getTitle());
+        eventDocument.setAvatarUrl(eventModel.getMainImageUrl());
         eventDocument.setDescription(eventModel.getShortDescription());
         eventDocument.setTags(eventModel.getTags().stream().map(Tag::getName).collect(Collectors.toSet()));
         eventDocument.setEventDate(eventModel.getEventDate());

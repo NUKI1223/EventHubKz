@@ -3,6 +3,7 @@ package org.ngcvfb.eventhubkz.Controllers;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
+import org.ngcvfb.eventhubkz.DTO.UserDTO;
 import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Services.EventLikeService;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,12 @@ public class LikesController {
         UserModel currentUser = (UserModel) authentication.getPrincipal();
         String status = likeService.addLike(eventId, currentUser.getId());
         return ResponseEntity.ok(status);
+    }
+
+    @Operation(summary = "getting all users which liked event")
+    @GetMapping("/{eventId}/users")
+    public ResponseEntity<List<UserDTO>> getUsersByLike(@PathVariable Long eventId) {
+        return ResponseEntity.ok(likeService.getUsersFromLikedEvent(eventId));
     }
 
 

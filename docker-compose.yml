@@ -54,6 +54,8 @@ services:
       - xpack.security.enabled=false
     ports:
       - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
     healthcheck:
       test: [ "CMD-SHELL", "curl -f http://localhost:9200 || exit 1" ]
       interval: 10s
@@ -86,6 +88,10 @@ services:
       - "15672:15672"
     networks:
       app:
+
+volumes:
+  esdata:
+    driver: local
 
 networks:
   app:

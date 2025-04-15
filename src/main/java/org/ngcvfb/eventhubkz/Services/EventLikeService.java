@@ -2,6 +2,7 @@ package org.ngcvfb.eventhubkz.Services;
 
 
 import org.ngcvfb.eventhubkz.DTO.EventDTO;
+import org.ngcvfb.eventhubkz.DTO.UserDTO;
 import org.ngcvfb.eventhubkz.Models.EventLike;
 import org.ngcvfb.eventhubkz.Models.EventModel;
 import org.ngcvfb.eventhubkz.Models.UserModel;
@@ -80,6 +81,17 @@ public class EventLikeService {
             eventDTOs.add(eventDTO);
         }
         return eventDTOs;
+    }
+
+    public List<UserDTO> getUsersFromLikedEvent(Long eventId) {
+        List<EventLike> eventLikes = eventLikeRepository.findByEventId(eventId);
+        List<UserDTO> users = new ArrayList<>();
+        for (EventLike eventLike : eventLikes) {
+            UserModel user = userService.getUserById(eventLike.getUser().getId());
+            users.add(mappingUtils.mapToUserDTO(user));
+        }
+        return users;
+
     }
 
 }
