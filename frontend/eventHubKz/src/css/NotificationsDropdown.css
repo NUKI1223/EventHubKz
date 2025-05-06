@@ -1,0 +1,175 @@
+.notifications-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 300px;
+    background: #ffffff;
+    color: black;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  .notifications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+  
+  
+  .notifications-list {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  
+  .notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #E0E0E0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .notification-item:last-child {
+    border-bottom: none;
+  }
+  
+  .notification-message {
+    font-size: 0.95rem;
+    color: black;
+    margin-bottom: 5px;
+  }
+  
+  .notification-meta {
+    font-size: 0.8rem;
+    color: #888;
+  }
+  
+  .notification-link {
+    color: #1C3E7C;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 5px;
+    color: black;
+  }
+  
+  .notification-link:hover {
+    text-decoration: underline;
+  }
+  
+  .notification-status {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-top: 5px;
+  }
+  
+  .read {
+    color: #28A745;
+  }
+  
+  .unread {
+    color: #DC3545;
+  }
+  
+  .no-notifications {
+    text-align: center;
+    font-size: 1rem;
+    color: #888;
+    padding: 20px;
+  }
+
+  
+  
+  .delete-all-btn {
+    background: none;
+    border: none;
+    color: #F44336;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+  
+  .notification-item {
+    position: relative;
+    padding: 10px 30px 10px 10px;
+    border-bottom: 1px solid #E0E0E0;
+  }
+  
+  .delete-one-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  .delete-one-btn:hover {
+    color: #F44336;
+  }
+
+@media (max-width: 768px) {
+  .notifications-dropdown {
+    width: 95%; /* Увеличиваем ширину для мобильных */
+    right: 2.5%; /* Центрируем по горизонтали */
+    left: auto;
+    top: 60px; /* Увеличиваем отступ сверху */
+    font-size: 1rem; /* Увеличиваем шрифт для удобства чтения */
+    padding: 15px; /* Увеличиваем внутренние отступы */
+  }
+
+  .notification-item {
+    padding: 12px 15px; /* Увеличиваем внутренние отступы */
+  }
+
+  .notification-message {
+    font-size: 1rem; /* Увеличиваем размер текста */
+  }
+
+  .notification-meta {
+    font-size: 0.85rem; /* Увеличиваем мета-информацию */
+  }
+
+  .delete-one-btn {
+    font-size: 1.2rem; /* Увеличиваем размер кнопки удаления */
+  }
+}
+
+@media (max-width: 480px) {
+  .notifications-dropdown {
+    width: 100%; /* Занимает всю ширину экрана */
+    right: 0;
+    left: 0;
+    top: 50px; /* Уменьшаем отступ сверху */
+    border-radius: 0; /* Убираем скругление */
+    font-size: 0.95rem; /* Увеличиваем шрифт для удобства чтения */
+    padding: 20px; /* Увеличиваем внутренние отступы */
+  }
+
+  .notification-item {
+    padding: 10px 15px; /* Увеличиваем внутренние отступы */
+  }
+
+  .notification-message {
+    font-size: 0.95rem; /* Увеличиваем текст */
+  }
+
+  .notification-meta {
+    font-size: 0.8rem; /* Увеличиваем мета-информацию */
+  }
+
+  .delete-one-btn {
+    font-size: 1.1rem; /* Увеличиваем размер кнопки удаления */
+  }
+
+  .delete-all-btn {
+    font-size: 1rem; /* Увеличиваем размер кнопки удаления всех */
+  }
+
+  .no-notifications {
+    font-size: 1rem; /* Увеличиваем текст для пустых уведомлений */
+  }
+}

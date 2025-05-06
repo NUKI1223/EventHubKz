@@ -1,0 +1,202 @@
+.admin-dashboard {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .admin-dashboard h2 {
+    text-align: center;
+    color: #1C3E7C;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+  .event-requests-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .event-request-card {
+    background-color: #F8F9FA;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-left: 5px solid #1C3E7C;
+  }
+  
+  .event-request-card h3 {
+    color: #1C3E7C;
+    margin-bottom: 10px;
+  }
+  
+  .short-description {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .full-description {
+    color: #666;
+    margin-top: 10px;
+  }
+  
+  .tags {
+    margin-top: 10px;
+  }
+  
+  .tag {
+    display: inline-block;
+    background: #FFD700;
+    color: #1C3E7C;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .location {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .event-type.online {
+    color: green;
+  }
+  
+  .event-type.offline {
+    color: red;
+  }
+  
+  .event-date, .deadline {
+    font-weight: bold;
+    color: #405A72;
+  }
+  
+  .event-image {
+    width: 40%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  
+  .status {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .status.approved {
+    color: green;
+  }
+  
+  .status.rejected {
+    color: red;
+  }
+  
+  .requester-email {
+    font-style: italic;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .admin-comment {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .approve-button, .reject-button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    color: #fff;
+    transition: background-color 0.2s;
+  }
+  
+  .approve-button {
+    background-color: #4CAF50;
+  }
+  
+  .reject-button {
+    background-color: #F44336;
+  }
+  
+  .approve-button:hover {
+    background-color: #45A049;
+  }
+  
+  .reject-button:hover {
+    background-color: #D32F2F;
+  }
+  
+  .loading,
+  .error,
+  .no-requests {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #405A72;
+  }
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .confirm-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .cancel-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .confirm-button:hover {
+    background-color: #45a049;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e53935;
+  }

@@ -1,0 +1,179 @@
+.event-detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.event-detail-header {
+  text-align: center;
+}
+
+.event-detail-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.event-detail-title {
+  font-size: 2rem;
+  margin: 10px 0;
+}
+
+.event-detail-content {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.event-detail-info {
+  flex: 1;
+  min-width: 300px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.event-detail-info p {
+  margin: 10px 0;
+}
+
+.event-detail-description {
+  flex: 2;
+  min-width: 300px;
+}
+
+.event-detail-description h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.event-detail-description p {
+  margin-bottom: 15px;
+}
+
+.event-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Стили для модального окна */
+.likes-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6); /* Чуть темнее фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px); /* Добавляем эффект размытия фона */
+}
+
+.likes-modal {
+  background: linear-gradient(145deg, #ffffff, #f0f4f8); /* Градиентный фон */
+  border-radius: 12px;
+  padding: 25px;
+  width: 90%;
+  max-width: 450px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15); /* Более мягкая тень */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.likes-modal h3 {
+  margin: 0 0 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #2c3e50; /* Темно-синий цвет для заголовка */
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #95a5a6; /* Серый цвет для кнопки закрытия */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: #e74c3c; /* Красный цвет при наведении */
+  transform: rotate(90deg); /* Эффект вращения */
+}
+
+.liked-users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.liked-user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #f5f7fa, #e4e7eb); /* Легкий градиент */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Мягкая тень */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.liked-user-card:hover {
+  transform: translateY(-2px); /* Легкий подъем при наведении */
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12); /* Усиленная тень */
+}
+
+.liked-user-avatar .user-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dfe6e9; /* Тонкая рамка вокруг аватарки */
+  transition: border-color 0.2s ease;
+}
+
+.liked-user-card:hover .user-avatar {
+  border-color: #74b9ff; /* Голубая рамка при наведении */
+}
+
+.liked-user-avatar .user-avatar-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #dfe6e9, #b2bec3); /* Градиент для плейсхолдера */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #636e72;
+  border: 2px solid #dfe6e9;
+  transition: border-color 0.2s ease;
+}
+
+.liked-user-card:hover .user-avatar-placeholder {
+  border-color: #74b9ff;
+}
+
+.liked-user-name {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #2d3436; /* Темный цвет текста */
+  letter-spacing: 0.3px;
+  transition: color 0.2s ease;
+}
+
+.liked-user-card:hover .liked-user-name {
+  color: #0984e3; /* Голубой цвет текста при наведении */
+}

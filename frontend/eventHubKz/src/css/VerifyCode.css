@@ -1,0 +1,52 @@
+/* VerifyCode.css */
+.verify-code-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .verify-code-form h2 {
+    text-align: center;
+    color: #405A72;
+    margin-bottom: 20px;
+  }
+  
+  .verify-code-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .verify-code-form input[type="email"],
+  .verify-code-form input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .verify-code-form button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #1C3E7C;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .verify-code-form button:hover {
+    background-color: #163366;
+  }
+  
+  .error-text {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+  

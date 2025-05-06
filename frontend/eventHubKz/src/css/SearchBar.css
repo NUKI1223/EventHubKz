@@ -1,0 +1,192 @@
+.search-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 6px 10px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input-container:focus-within {
+  border-color: #F8E9A1;
+  box-shadow: 0 0 6px rgba(248, 233, 161, 0.2);
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  font-family: 'RubikBold', sans-serif;
+  color: #333;
+  background: transparent;
+  padding-right: 50px; /* Учли место для линии и лупы */
+}
+
+.search-input::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+.line-icon {
+  margin-right: 30px;
+}
+
+.search-button-icon {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  right: 11px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.search-button-icon:hover {
+  opacity: 1;
+}
+
+.search-button-icon:active {
+  transform: scale(0.9);
+}
+
+/* Стили для автодополнения */
+.suggestions-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Скругление чуть больше */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Тень чуть глубже */
+  max-height: 200px; /* Чуть больше высота */
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 6px; /* Увеличили отступ сверху */
+  list-style: none;
+  padding: 5px 0; /* Небольшой внутренний отступ */
+  animation: fadeIn 0.2s ease-in; /* Анимация появления */
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 0.9rem; /* Чуть больше шрифт */
+  font-family: 'RubikBold', sans-serif;
+  color: #1B6FA8; /* Цвет текста как у хедера */
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: #F8E9A1; /* Жёлтый фон при наведении */
+  color: #333; /* Тёмный текст для контраста */
+}
+
+.suggestion-type {
+  font-size: 0.8rem;
+  color: #666; /* Серый цвет для типа */
+  font-family: 'RubikBold', sans-serif;
+  opacity: 0.7; /* Слегка прозрачный */
+}
+
+.suggestion-value {
+  flex: 1;
+  font-family: 'RubikBold', sans-serif;
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .search-bar {
+    max-width: 100%;
+    margin: 10px 0;
+    margin-left: 0;
+  }
+
+  .search-input-container {
+    padding: 5px 8px;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .search-input {
+    font-size: 0.85rem;
+    padding-right: 45px; /* Чуть меньше на мобильных */
+  }
+
+  .line-icon {
+    width: 8px;
+    height: 18px;
+    right: 28px;
+  }
+
+  .search-button-icon {
+    width: 16px;
+    height: 16px;
+    right: 8px;
+  }
+
+  .suggestions-list {
+    border-radius: 6px;
+    max-height: 180px;
+    margin-top: 4px;
+  }
+
+  .suggestion-item {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+
+  .suggestion-type {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input-container {
+    border-radius: 18px;
+  }
+
+  .search-input {
+    font-size: 0.8rem;
+  }
+
+  .line-icon {
+    right: 26px;
+  }
+
+  .suggestion-item {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+
+  .suggestion-type {
+    font-size: 0.7rem;
+  }
+}

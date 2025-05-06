@@ -1,0 +1,43 @@
+.tag-selector {
+    position: relative;
+    width: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .tag-selector-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    background-color: #fff;
+  }
+  
+  .tag-selector-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    z-index: 100;
+    padding: 8px;
+  }
+  
+  .tag-item {
+    display: flex;
+    margin-bottom: 4px;
+    gap: 10px;
+  }
+
+@media (max-width: 768px) {
+  .tag-selector {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .tag-selector-input {
+    font-size: 0.8rem;
+  }
+}

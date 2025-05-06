@@ -1,0 +1,83 @@
+.support-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'RubikRegular', sans-serif; /* Основной шрифт для текста */
+}
+
+h1, h2 {
+    font-family: 'RubikBold', Arial, sans-serif; /* Шрифт для заголовков */
+    color: #333;
+}
+
+.faq, .contact-form, .contact-info {
+    margin-bottom: 40px;
+}
+
+.faq ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.faq li {
+    margin-bottom: 10px;
+}
+
+.contact-form div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-bottom: 5px;
+}
+
+.contact-form input, .contact-form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'RubikRegular', Arial, sans-serif; /* Шрифт для полей ввода */
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'RubikBold', Arial, sans-serif; /* Шрифт для кнопки */
+}
+
+.contact-info p {
+    margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .support-container {
+    padding: 10px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.9rem;
+  }
+
+  .contact-form button {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.8rem;
+  }
+
+  .contact-form button {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+}

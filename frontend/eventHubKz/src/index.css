@@ -1,0 +1,62 @@
+/* styles.css */
+/* Сброс и базовые стили */
+
+form, form input{
+  background-color: transparent !important;
+  border: transparent !important;
+  margin-bottom: 0px !important
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  background-color: #fafafa; /* светлый фон */
+  color: #333;
+  line-height: 1.6;
+  
+}
+
+a {
+  color: inherit;
+  text-decoration: none; /* Убираем подчеркивание для всех ссылок */
+}
+
+a:hover {
+  text-decoration: none; /* Не меняем стиль при наведении */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #405A72; /* пастельный темно-синий */
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+
+  .container {
+    padding: 0 5px;
+  }
+}

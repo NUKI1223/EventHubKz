@@ -1,0 +1,48 @@
+.verification {
+    display: flex;
+    min-height: 100vh;
+    background-color: #FEF6EF;
+}
+
+.verification__poster {
+    position: relative;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("../assets/images/signup_rectangle.png") no-repeat center center;
+    background-size: contain;
+}
+
+.verification__image {
+    max-width: 75%;
+    z-index: 2;
+    margin-left: 200px;
+}
+  
+.verification__main {
+    width: 50%;
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff8f4;
+}
+
+.verification__btn {
+    width: 100%;
+    padding: 15px 0;
+    background-color: #1B6FA8;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 500px;
+}
+
+.verification__btn:hover {
+    background-color: #044773;
+}

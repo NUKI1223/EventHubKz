@@ -1,0 +1,262 @@
+.user-profile {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px 15px;
+}
+
+.profile-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.profile-sidebar {
+  flex: 1;
+  min-width: 300px;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 15px;
+  display: block;
+  transition: opacity 0.3s ease;
+}
+
+.profile-avatar-placeholder {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #ddd;
+  margin: 0 auto 15px;
+}
+
+.avatar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-overlay-text {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.avatar-container:hover .avatar-overlay {
+  opacity: 1;
+}
+
+.avatar-container:hover .profile-avatar {
+  opacity: 0.7;
+}
+
+.avatar-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.profile-sidebar h2 {
+  font-size: 2rem;
+  margin: 15px 0;
+}
+
+.location {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.follow-btn, .message-btn {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.follow-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.follow-btn:hover {
+  background-color: #0056b3;
+}
+
+.message-btn {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+}
+
+.message-btn:hover {
+  background-color: #c7c7c7;
+}
+
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.profile-details {
+  flex: 2;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details-content {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.profile-details h3 {
+  font-size: 1.5rem;
+  margin: 20px 0 10px;
+  color: #333;
+}
+
+.profile-details p {
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+  margin: 20px 0;
+}
+
+.edit-btn {
+  margin-top: 30px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-btn:hover {
+  background-color: #218838;
+}
+
+.liked-events {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.liked-events h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.empty-message {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin: 10px 0;
+}
+
+.logout__button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout__button:hover {
+  background-color: #c82333;
+}
+
+.profile-logout {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .profile-sidebar,
+  .profile-details {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-details h3 {
+    font-size: 1.2rem;
+  }
+}

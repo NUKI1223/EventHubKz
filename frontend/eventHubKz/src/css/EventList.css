@@ -1,0 +1,304 @@
+.delete-event-btn {
+  background: #f44336; /* Красный цвет */
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px; /* Совпадает с кнопкой "Подробнее" */
+  font-size: 1rem; /* Совпадает с кнопкой "Подробнее" */
+  cursor: pointer;
+  border-radius: 5px; /* Совпадает с кнопкой "Подробнее" */
+  text-align: center;
+  transition: background-color 0.2s;
+  display: inline-block; /* Совпадает с кнопкой "Подробнее" */
+}
+
+.delete-event-btn:hover {
+  background-color: #d32f2f; /* Более тёмный красный при наведении */
+}
+
+.events-container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .events-container h2 {
+    text-align: center;
+    color: #405A72;
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }
+  
+
+  .filters, .tag-filter {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .filters input,
+  .filters select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .tag-filter label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .tag-filter .reset-button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .tag-filter .tag-list {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+  }
+  
+  .tag-filter .tag-list button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .tag-filter .tag-list button:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .tag-filter .tag-list button.selected {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #007bff;
+  }
+  
+  .tag-filter .more-button {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .tag-filter .more-button:hover {
+    background-color: #f0f0f0;
+  }
+  
+
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+  
+
+  .event-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .event-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .event-content {
+    padding: 10px 5px;
+    text-align: left;
+  }
+  
+  .event-title {
+    font-size: 18px;
+    color: #1C3E7C;
+    margin: 5px 0;
+  }
+  
+  .event-title-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .event-title-link:hover {
+    color: #007bff;
+  }
+  
+  .event-description {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .tags {
+    margin-bottom: 10px;
+  }
+  
+  .tag {
+    display: inline-block;
+    background-color: #FFD700;
+    color: #1C3E7C;
+    padding: 5px 10px;
+    margin: 3px 3px 3px 0;
+    border-radius: 4px;
+    font-size: 0.85rem;
+  }
+  
+  .event-date,
+  .event-likecount,
+  .event-location {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  .event-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .details-button {
+    background: #1C3E7C;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.2s;
+    display: inline-block;
+  }
+  
+  .details-button:hover {
+    background-color: #163366;
+  }
+  
+  .loading,
+  .error,
+  .no-events {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #405A72;
+  }
+  
+  .search-results-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+  
+  .search-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-tabs button {
+    padding: 10px 20px;
+    border: none;
+    background: #f4f4f4;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .search-tabs button.active {
+    background: #007bff;
+    color: white;
+  }
+  
+  .users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .user-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .user-link {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .user-avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #ddd;
+    margin-bottom: 10px;
+  }
+  
+  .no-users {
+    text-align: center;
+    color: #666;
+  }
+
+@media (max-width: 768px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+
+  .event-title {
+    font-size: 16px;
+  }
+
+  .details-button,
+  .delete-event-btn {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-title {
+    font-size: 14px;
+  }
+
+  .details-button,
+  .delete-event-btn {
+    font-size: 0.8rem;
+    padding: 6px 8px;
+  }
+}

@@ -1,0 +1,82 @@
+.signin {
+    display: flex;
+    min-height: 100vh;
+    background-color: #FEF6EF;
+  }
+
+.signin__poster {
+    position: relative;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url("../assets/images/signup_rectangle.png") no-repeat center center;
+    background-size: contain;
+}
+
+.signin__image {
+    max-width: 75%;
+    z-index: 2;
+    transform: translateX(-100px);
+  }
+
+.signin__main {
+    width: 50%;
+    padding: 4rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fff8f4;
+    margin-left: 100px;
+}
+
+.signin__welcome {
+    font-family: "LatoBold" sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2f2f2f;
+    margin-bottom: 2rem;
+}
+
+.signin__btn {
+    width: 100%;
+    padding: 15px 0;
+    background-color: #1B6FA8;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: 500px;
+}
+
+.signin__btn:hover {
+    background-color: #044773;
+}
+
+.signin__divider {
+    text-align: center;
+    margin: 20px 0 10px;
+    color: #aaa;
+    font-size: 14px;
+    margin-right: 318px;
+}
+  
+.signin__signup-text {
+    text-align: center;
+    color: #aaa;
+    font-size: 14px;
+    margin-right: 318px;
+}
+  
+.signin__signup-link {
+    color: #1B6FA8;
+    font-weight: 600;
+    text-decoration: none;
+}
+  
+.signin__signup-link:hover {
+    text-decoration: underline;
+}
