@@ -10,6 +10,7 @@ import org.ngcvfb.eventhubkz.Models.UserModel;
 import org.ngcvfb.eventhubkz.Services.AuthenticationService;
 import org.ngcvfb.eventhubkz.Services.JwtService;
 import org.ngcvfb.eventhubkz.Services.S3Service;
+import org.ngcvfb.eventhubkz.Services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.UUID;
 
 
@@ -40,6 +42,11 @@ public class AuthenticationController {
                                       @RequestPart(value = "file", required = false) MultipartFile file) {
 
         try {
+            if (authenticationService.userExists(registerUserDto.getEmail())){
+                return ResponseEntity
+                        .status(HttpStatus.CONFLICT)
+                        .body(Map.of("message", "User already exists"));
+            }
             if (file != null && !file.isEmpty()) {
                 File tempFile = File.createTempFile("profile-", file.getOriginalFilename());
                 file.transferTo(tempFile);

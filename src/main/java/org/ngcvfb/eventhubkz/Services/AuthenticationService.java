@@ -38,6 +38,10 @@ public class AuthenticationService {
         this.emailService = emailService;
         this.mappingUtils = mappingUtils;
     }
+    public boolean userExists(String userEmail) {
+        Optional<UserModel> user = userRepository.findByEmail(userEmail);
+        return user.isPresent();
+    }
 
     public UserModel signup(UserDTO input) {
         String password = passwordEncoder.encode(input.getPassword());

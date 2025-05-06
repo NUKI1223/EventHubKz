@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.ngcvfb.eventhubkz.Models.Notification;
 import org.ngcvfb.eventhubkz.Repository.NotificationRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class NotificationController {
         return ResponseEntity.ok().build();
     }
     @DeleteMapping("/all")
+    @Transactional
     public ResponseEntity<Void> deleteAllNotifications(@RequestParam String username) {
         notificationRepository.deleteAllByUserEmail(username);
         return ResponseEntity.ok().build();

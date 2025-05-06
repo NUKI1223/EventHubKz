@@ -107,8 +107,8 @@ public class EventService {
 
         EventModel event = eventRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Event with id " + id + " not found"));
-        eventRepository.delete(event);
-        eventRepository.flush();
+        eventLikeRepository.deleteAll(eventLikeRepository.findByEventId(event.getId()));
+        eventRepository.deleteEventById(id);
         eventSearch.deleteEventFromSearch(id.toString());
 
     }
@@ -121,7 +121,6 @@ public class EventService {
             return "User has not liked any events.";
         }
 
-        // Собираем ID мероприятий, которые пользователь уже лайкал
         Set<Long> likedEventIds = likes.stream()
                 .map(like -> like.getEvent().getId())
                 .collect(Collectors.toSet());

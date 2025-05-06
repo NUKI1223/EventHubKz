@@ -44,7 +44,8 @@ public class SecurityConfiguration {
                                 "api/events/**",
                                 "api/like/{eventId}",
                                 "api/tags",
-                                "api/search").permitAll()
+                                "api/search",
+                                "/error").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
